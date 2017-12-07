@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0px;
+            padding: 10px;
+        }
+
+        li {
+            width: 15px;
+            margin-right: 1px;
+            display: inline-block;
+            background-color: red;
+        }
+
+        li:hover {
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+<input type="text" id="ipt">
+<button id="input">输入</button>
+<button id="sortli">排序</button>
+<ul id="box">
+
+</ul>
+<script>
+    var ipt = document.getElementById("ipt");
+    var addli = document.getElementById("input");
+    var sortli = document.getElementById("sortli");
+    var box = document.getElementById("box");
+    var num = 0;
+
+    function arrsort(data) {
+        data.sort(function (a, b) {
+            return a - b;
+        })
+        return data;
+    }
+
+    addli.onclick = function () {
+        if (num > 60) {
+            alert("队列元素不能超过60！");
+        } else {
+            if (ipt.value > 9 && ipt.value < 101) {
+                var li = document.createElement("li");
+                li.style.height = ipt.value + "px";
+                ipt.value = "";
+                box.appendChild(li);
+                num++;
+            } else {
+                alert("请输入10到100之间的数字！");
+                ipt.value = "";
+            }
+        }
+    }
+    sortli.onclick = function () {
+        // console.log(box.children);
+        var arr = [];
+        for(var i = 0 ; i < box.children.length ; i++) {
+            arr.push(Number(box.children[i].style.height.split('px')[0]));
+        }
+        arr = arrsort(arr);
+        for (var j = 0 ; j < arr.length ; j++) {
+            box.children[j].style.height = arr[j] + "px";
+        }
+        return box;
+
+    }
+
+
+</script>
+</body>
+</html>

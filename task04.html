@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        li {
+            display: inline-block;
+            background-color: red;
+            text-align: center;
+            margin: 5px;
+            cursor: pointer;
+            padding: 3px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<input id="duilie">
+<button id="leftin">左侧入</button>
+<button id="rightin">右侧入</button>
+<button id="leftout">左侧出</button>
+<button id="rightout">右侧出</button>
+<div>
+    <ul id="container">
+    </ul>
+</div>
+<script>
+    var ipt = document.getElementById("duilie");
+    var Li = document.getElementById("leftin");
+    var Ri = document.getElementById("rightin");
+    var Lo = document.getElementById("leftout");
+    var Ro = document.getElementById("rightout");
+    var box = document.getElementById("container");
+
+    //左侧入
+    Li.onclick = function () {
+        if (!isNaN(ipt.value) && ipt.value !== "") {
+            var li = document.createElement("li");
+            li.innerText = ipt.value;
+            ipt.value = "";
+            box.insertBefore(li, box.firstChild);
+
+        } else {
+            alert("请输入一个数字！");
+            ipt.value = "";
+        }
+    }
+    //右侧入
+    Ri.onclick = function () {
+        if (!isNaN(ipt.value) && ipt.value !== "") {
+            var li = document.createElement("li");
+            li.innerText = ipt.value;
+            ipt.value = "";
+            box.appendChild(li);
+        } else {
+            alert("请输入一个数字！");
+            ipt.value = "";
+        }
+    }
+    //    左侧出
+    Lo.onclick = function () {
+        if (box.children.length < 1) {
+            alert("没有数据！");
+        }
+        box.removeChild(box.firstChild);
+    }
+    //    右侧出
+    Ro.onclick = function () {
+        if (box.children.length < 1) {
+            alert("没有数据！");
+        }
+        box.removeChild(box.lastChild);
+    }
+    box.addEventListener('click', function (e) {
+        box.removeChild(e.target);
+    });
+
+
+</script>
+</body>
+</html>
